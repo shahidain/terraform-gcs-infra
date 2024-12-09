@@ -13,7 +13,7 @@ variable "resource_zone_location" {
 variable "gc_project" {
   type        = string
   description = "Google Cloud project name"
-  default     = "mycollection-in"
+  default     = "terraform-gcs-infra"
 }
 
 variable "provider_region" {
