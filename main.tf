@@ -1,10 +1,3 @@
-terraform {
-  backend "gcs" {
-    bucket = "terraform-gcs-infra"
-    prefix = "terraform/state"
-  }
-}
-
 provider "google" {
   credentials = var.google_credentials
   project     = var.gc_project
