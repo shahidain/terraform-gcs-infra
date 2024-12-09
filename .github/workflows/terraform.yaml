@@ -46,6 +46,7 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         TF_VAR_google_credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
       run: terraform plan -input=false
 
@@ -54,5 +55,6 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         TF_VAR_google_credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
       run: terraform apply -input=false -var="google_credentials=${{ secrets.GOOGLE_CREDENTIALS }}" -auto-approve
