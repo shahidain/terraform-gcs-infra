@@ -2,7 +2,10 @@ name: 'Terraform'
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - develop
+      - feature/*
   pull_request:
 
 permissions:
@@ -32,6 +35,8 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       run: terraform init
 
     # Checks that all Terraform configuration files adhere to a canonical format
@@ -41,6 +46,7 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         TF_VAR_google_credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
       run: terraform plan -input=false
 
@@ -49,5 +55,6 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         TF_VAR_google_credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
       run: terraform apply -input=false -var="google_credentials=${{ secrets.GOOGLE_CREDENTIALS }}" -auto-approve
