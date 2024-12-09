@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraform Build'
     runs-on: ubuntu-22.04
     
     defaults:
@@ -29,7 +29,7 @@ jobs:
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-    - name: Terraform Init
+    - name: Terraform Initialization
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       run: terraform init
