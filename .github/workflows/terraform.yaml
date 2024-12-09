@@ -45,6 +45,7 @@ jobs:
     - name: Terraform Plan
       env:
         TF_VAR_google_credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       run: terraform plan -input=false
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
@@ -53,4 +54,5 @@ jobs:
       if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       env:
         TF_VAR_google_credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       run: terraform apply -input=false -var="google_credentials=${{ secrets.GOOGLE_CREDENTIALS }}" -auto-approve
