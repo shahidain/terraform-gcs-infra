@@ -6,7 +6,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "tf_state_bucket_gcs" {
-  name                     = "tf-state-bucket-gcs"
+  name                     = "tf-run-state-bucket-gcs"
   location                 = "${var.resource_zone_location}1"
   force_destroy            = true
   project                  = var.gc_project
