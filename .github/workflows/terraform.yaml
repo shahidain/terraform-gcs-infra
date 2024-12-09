@@ -57,4 +57,4 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         TF_VAR_google_credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
-      run: terraform apply -input=false -var="google_credentials=${{ secrets.GOOGLE_CREDENTIALS }}" -auto-approve
+      run: terraform apply -input=false -auto-approve
