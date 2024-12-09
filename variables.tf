@@ -1,6 +1,6 @@
 variable "google_credentials" {
   type        = string
-  description = "value of the Google Cloud service account token"
+  description = "Value of the Google Cloud service account token"
   sensitive   = true
 }
 
