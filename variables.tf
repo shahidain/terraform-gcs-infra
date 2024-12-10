@@ -21,3 +21,15 @@ variable "provider_region" {
   description = "Google Cloud provider region"
   default     = "us-central1"
 }
+
+variable "remote_state_bucket" {
+  type = object({
+    bucket_name = string
+    prefix      = string
+  })
+  description = "Remote state bucket object"
+  default = {
+    bucket_name = "terraform-gcs-infra"
+    prefix      = "terraform/state"
+  }
+}
