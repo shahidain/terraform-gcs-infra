@@ -20,3 +20,19 @@ resource "google_storage_bucket" "tf_state_bucket_gcs" {
     }
   }
 }
+
+resource "google_storage_bucket" "temp_tf_state_bucket_gcs" {
+  name                     = "temp-${data.terraform_remote_state.bucket_state.outputs.tf_state_bucket_gcs.name}"
+  location                 = "${var.resource_zone_location}1"
+  force_destroy            = true
+  project                  = var.gc_project
+  public_access_prevention = "enforced"
+  lifecycle_rule {
+    condition {
+      age = 30
+    }
+    action {
+      type = "Delete"
+    }
+  }
+}
